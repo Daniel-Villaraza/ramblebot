@@ -91,12 +91,16 @@ public class UnigramWordPredictor implements WordPredictor {
    * 
    * - If the last word in the context is "dog", the next word should be "barked" because 
    *   "barked" is the only word that follows "dog" in the training data.
+   *
    * 
    * The probabilities of selecting each word should match the relative 
    * frequencies of the words that follow in the original training data. 
+   *
+   * If the last word in the context does not have an entry in the neighbor map,
+   * any random word can be returned.
    * 
    * @param context a list of words representing the current context
-   * @return the predicted next word, or null if no prediction can be made
+   * @return the predicted next word
    */
   public String predictNextWord(List<String> context) {
     // TODO: Return a predicted word given the words preceding it
