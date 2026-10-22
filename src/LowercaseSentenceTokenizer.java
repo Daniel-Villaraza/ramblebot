@@ -36,8 +36,12 @@ public class LowercaseSentenceTokenizer implements Tokenizer {
       String token = scanner.next();
       String lowerCaseToken = token.toLowerCase();
 
+      // Split the token into its individual characters and store them in a char array, tokenChars
       char[] tokenChars = lowerCaseToken.toCharArray();
 
+      // Check if the last character of the token is a period. 
+      // If so, add the original token without the period and add the period as a separate token
+      // Otherwise, add the token like normal
       if (tokenChars[tokenChars.length - 1] == '.') {
         String tokenWithoutPeriod = "";
 
