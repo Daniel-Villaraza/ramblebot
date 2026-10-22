@@ -17,7 +17,7 @@ class LowercaseSentenceTokenizerTest {
 
     // Wave 2
     @Test
-    void testTokenWithManySpaces() {
+    void testTokenizeWithManySpaces() {
         LowercaseSentenceTokenizer tokenizer = new LowercaseSentenceTokenizer();
         Scanner scanner = new Scanner("xyz   ijk   uvw");
         List<String> tokens = tokenizer.tokenize(scanner);
