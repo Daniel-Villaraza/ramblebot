@@ -39,7 +39,13 @@ public class LowercaseSentenceTokenizer implements Tokenizer {
       char[] tokenChars = lowerCaseToken.toCharArray();
 
       if (tokenChars[tokenChars.length - 1] == '.') {
-        tokens.add(lowerCaseToken);
+        String tokenWithoutPeriod = "";
+
+        for (int i = 0; i < tokenChars.length - 1; i++) {
+          tokenWithoutPeriod += tokenChars[i];
+        }
+        
+        tokens.add(tokenWithoutPeriod);
         tokens.add(".");
       } else { 
         tokens.add(lowerCaseToken);
