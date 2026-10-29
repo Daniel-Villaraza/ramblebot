@@ -129,6 +129,21 @@ public class UnigramWordPredictor implements WordPredictor {
   public String predictNextWord(List<String> context) {
     // TODO: Return a predicted word given the words preceding it
     // Hint: only the last word in context should be looked at
+    
+    Map<String, Integer> wordFrequency = new HashMap<>();
+
+    for (String word : neighborMap.get(context)) {
+      if (!wordFrequency.containsKey(word)) {
+        wordFrequency.put(word, 1);
+      } else {
+        int currentWordCount = wordFrequency.get(word);
+        wordFrequency.put(word, currentWordCount + 1);
+      }
+    }
+
+    
+
+
     return null;
   }
   
