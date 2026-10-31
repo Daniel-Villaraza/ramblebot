@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -131,7 +132,10 @@ public class UnigramWordPredictor implements WordPredictor {
     // Hint: only the last word in context should be looked at
     
     Map<String, Integer> wordFrequency = new HashMap<>();
+    
+    int totalWords = 0;
 
+    // ex: context = "the"
     for (String word : neighborMap.get(context)) {
       if (!wordFrequency.containsKey(word)) {
         wordFrequency.put(word, 1);
@@ -139,7 +143,26 @@ public class UnigramWordPredictor implements WordPredictor {
         int currentWordCount = wordFrequency.get(word);
         wordFrequency.put(word, currentWordCount + 1);
       }
+
+      totalWords++;
     }
+
+    // wordFrequency map
+    // {
+    //   "cat" : 2,
+    //   "dog" : 1
+    // }
+
+    Map<String, Double> probability = new HashMap<>();
+    for (String key : wordFrequency.keySet()) {
+      probability.put(key, 1.0 * wordFrequency.get(key)/totalWords);
+    }
+
+    // probability map
+    // {
+    //   "cat" : 0.6666666666666666,
+    //   "dog" : 0.3333333333333333
+    // }
 
     
 
