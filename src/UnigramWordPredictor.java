@@ -128,46 +128,12 @@ public class UnigramWordPredictor implements WordPredictor {
    * @return the predicted next word
    */
   public String predictNextWord(List<String> context) {
-    // TODO: Return a predicted word given the words preceding it
-    // Hint: only the last word in context should be looked at
+    List<String> nextWords = neighborMap.get(context);
+
+    Random random = new Random();
+    int randInt = random.nextInt(nextWords.size());
     
-    Map<String, Integer> wordFrequency = new HashMap<>();
-    
-    int totalWords = 0;
-
-    // ex: context = "the"
-    for (String word : neighborMap.get(context)) {
-      if (!wordFrequency.containsKey(word)) {
-        wordFrequency.put(word, 1);
-      } else {
-        int currentWordCount = wordFrequency.get(word);
-        wordFrequency.put(word, currentWordCount + 1);
-      }
-
-      totalWords++;
-    }
-
-    // wordFrequency map
-    // {
-    //   "cat" : 2,
-    //   "dog" : 1
-    // }
-
-    Map<String, Double> probability = new HashMap<>();
-    for (String key : wordFrequency.keySet()) {
-      probability.put(key, 1.0 * wordFrequency.get(key)/totalWords);
-    }
-
-    // probability map
-    // {
-    //   "cat" : 0.6666666666666666,
-    //   "dog" : 0.3333333333333333
-    // }
-
-    
-
-
-    return null;
+    return nextWords.get(randInt);
   }
   
   /**
