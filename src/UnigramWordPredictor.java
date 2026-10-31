@@ -128,7 +128,15 @@ public class UnigramWordPredictor implements WordPredictor {
    * @return the predicted next word
    */
   public String predictNextWord(List<String> context) {
-    List<String> nextWords = neighborMap.get(context);
+    String word = "";
+
+    for (int i = 0; i < context.size(); i++) {
+      word = context.get(i);
+    }
+      
+    // value from "context" referenced in word variable through above loop;
+    // test would throw NullPointerException otherwise
+    List<String> nextWords = neighborMap.get(word);
 
     Random random = new Random();
     int randInt = random.nextInt(nextWords.size());
