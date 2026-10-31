@@ -135,7 +135,8 @@ public class UnigramWordPredictor implements WordPredictor {
     }
       
     // value from "context" referenced in word variable through above loop;
-    // test would throw NullPointerException otherwise
+    // test would throw NullPointerException if context was passed as an 
+    // argument directly below otherwise
     List<String> nextWords = neighborMap.get(word);
 
     Random random = new Random();
