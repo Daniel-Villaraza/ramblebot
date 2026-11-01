@@ -52,30 +52,24 @@ public class UnigramWordPredictor implements WordPredictor {
   public void train(Scanner scanner) {
     List<String> trainingWords = tokenizer.tokenize(scanner);
     neighborMap = new HashMap<>();
-
-    for (String token : trainingWords) {
-
-      // if token does not exist in the map...
-      if (!neighborMap.containsKey(token)) {
-
-        // declare a variable to hold a list of words that appear after the token as strings
+    
+    for (int i = 0; i < trainingWords.size(); i++) {
+      if (i == trainingWords.size() - 1) {
+        break;
+      }
+      
+      if (!neighborMap.containsKey(trainingWords.get(i))) {
         List<String> wordsAfterToken = new ArrayList<>();
-  
-          for (int i = 0; i < trainingWords.size(); i++) {
-            if (i == trainingWords.size() - 1) {
-              break;
-            } else { 
-
-              // add the word after the token to wordsAfterToken if the current word is the token
-              if (trainingWords.get(i) == token) {
-                wordsAfterToken.add(trainingWords.get(i + 1));
-              }
+        for (int j = 0; j < trainingWords.size(); j++) {
+          if (j != trainingWords.size() - 1) {
+            if (trainingWords.get(j) == trainingWords.get(i)) {
+              wordsAfterToken.add(trainingWords.get(j + 1));
             }
           }
-          
-        // put the token and the list of words into the map
-        neighborMap.put(token, wordsAfterToken);
-      }
+        }
+
+        neighborMap.put(trainingWords.get(i), wordsAfterToken);
+      } 
     }
   }
 
