@@ -54,22 +54,23 @@ public class UnigramWordPredictor implements WordPredictor {
     neighborMap = new HashMap<>();
     
     for (int i = 0; i < trainingWords.size(); i++) {
+
+      // if at last index
       if (i == trainingWords.size() - 1) {
         break;
       }
       
       if (!neighborMap.containsKey(trainingWords.get(i))) {
         List<String> wordsAfterToken = new ArrayList<>();
-        for (int j = 0; j < trainingWords.size(); j++) {
-          if (j != trainingWords.size() - 1) {
-            if (trainingWords.get(j) == trainingWords.get(i)) {
-              wordsAfterToken.add(trainingWords.get(j + 1));
-            }
-          }
-        }
+        wordsAfterToken.add(trainingWords.get(i + 1));
 
         neighborMap.put(trainingWords.get(i), wordsAfterToken);
-      } 
+      } else {
+        List<String> wordsAfterToken = neighborMap.get(trainingWords.get(i));
+        wordsAfterToken.add(trainingWords.get(i + 1));
+
+        neighborMap.put(trainingWords.get(i), wordsAfterToken);
+      }
     }
   }
 
